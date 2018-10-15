@@ -1,5 +1,7 @@
 package com.company.ClientServer;
 
+import com.company.ClientHandler;
+
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
@@ -29,15 +31,18 @@ public class SocketServer {
 
             System.out.println("\nNew client accepted.\n");
 
+            //ClientHandler handler = new ClientHandler(client);
+            //handler.start();
             ClientHandler handler = new ClientHandler(client);
             handler.start();
+
         } while (true);
 
 
     }
 }
 
-class ClientHandler extends Thread  {
+/*class ClientHandler extends Thread  {
 
     private Socket client;
     private Scanner input;
@@ -78,4 +83,4 @@ class ClientHandler extends Thread  {
             System.out.println("Unable to disconnect!");
         }
     }
-}
+}*/

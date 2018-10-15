@@ -13,6 +13,7 @@ public class SocketClient {
 
         try {
             host = InetAddress.getLocalHost();
+
         }
         catch (UnknownHostException uhEx) {
             System.out.println("\nHost ID not Found!\n");
