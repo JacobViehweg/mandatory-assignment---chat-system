@@ -62,6 +62,17 @@ public class SocketServer {
 
     }
 
+    public static void writeToSelf (String message, long ID) {
+
+        for (ClientHandler handler:clientHandlerList) {
+
+            if (handler.getHandlerID() == ID) {
+                handler.sendMessage(CommandCheck.message(message,handler));
+            }
+        }
+
+    }
+
 
 
 
