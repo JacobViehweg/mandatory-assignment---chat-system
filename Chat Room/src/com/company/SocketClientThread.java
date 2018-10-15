@@ -29,14 +29,6 @@ public class SocketClientThread extends Thread {
         while(true) {
             received = input.nextLine();
             System.out.println(received);
-
-            try {
-                Thread.sleep(1);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-
         }
 
 
