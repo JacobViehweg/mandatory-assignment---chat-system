@@ -4,12 +4,15 @@ import com.company.ClientHandler;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class SocketServer {
 
     private static ServerSocket serverSocket;
     private static final int PORT = 1234;
+    private static List<ClientHandler> clientHandlerList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
 
@@ -31,56 +34,29 @@ public class SocketServer {
 
             System.out.println("\nNew client accepted.\n");
 
-            //ClientHandler handler = new ClientHandler(client);
-            //handler.start();
             ClientHandler handler = new ClientHandler(client);
             handler.start();
+
+            clientHandlerList.add(handler);
+            System.out.println(handler + " " + clientHandlerList.size() );
 
         } while (true);
 
 
     }
+
+    public static void writeToClients (String message) {
+
+        for (ClientHandler handler:clientHandlerList) {
+
+            handler.sendMessage(message);
+
+        }
+
+
+
+    }
+
+
+
 }
-
-/*class ClientHandler extends Thread  {
-
-    private Socket client;
-    private Scanner input;
-    private PrintWriter output;
-
-    public ClientHandler(Socket socket) {
-
-        client = socket;
-
-        try {
-            input = new Scanner(client.getInputStream());
-            output = new PrintWriter(client.getOutputStream(),true);
-        }
-        catch (IOException ioEx) {
-            ioEx.printStackTrace();
-        }
-    }
-
-    public void run() {
-
-        String received;
-
-        do {
-            received = input.nextLine();
-
-            output.println("ECHO: " + received);
-            System.out.println("Recieved: " + received);
-
-        } while (!received.equals("QUIT"));
-
-        try {
-            if (client!=null) {
-                System.out.println("Closing down connection...");
-                client.close();
-            }
-        }
-        catch (IOException ioEx) {
-            System.out.println("Unable to disconnect!");
-        }
-    }
-}*/

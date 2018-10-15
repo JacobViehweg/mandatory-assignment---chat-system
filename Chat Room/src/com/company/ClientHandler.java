@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.ClientServer.SocketServer;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -32,7 +34,9 @@ public class ClientHandler extends Thread  {
         do {
             received = input.nextLine();
 
-            output.println("ECHO: " + received);
+            //output.println("ECHO: " + received);
+            SocketServer.writeToClients(received);
+
             System.out.println("Recieved: " + received);
 
         } while (!received.equals("QUIT"));
@@ -47,4 +51,9 @@ public class ClientHandler extends Thread  {
             System.out.println("Unable to disconnect!");
         }
     }
+
+    public void sendMessage (String message) {
+        output.println(message);
+    }
+
 }

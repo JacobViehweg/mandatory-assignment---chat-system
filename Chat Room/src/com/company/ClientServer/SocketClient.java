@@ -1,5 +1,7 @@
 package com.company.ClientServer;
 
+import com.company.SocketClientThread;
+
 import java.io.*;
 import java.net.*;
 import java.util.*;
@@ -19,6 +21,9 @@ public class SocketClient {
             System.out.println("\nHost ID not Found!\n");
             System.exit(1);
         }
+
+
+
         sendMessages();
     }
 
@@ -36,14 +41,17 @@ public class SocketClient {
             Scanner userEntry = new Scanner(System.in);
             String message, response;
 
+            SocketClientThread socketClientThread = new SocketClientThread(socket);
+            socketClientThread.start();
+
             do {
                 System.out.print("Enter message ('QUIT' to exit): ");
                 message = userEntry.nextLine();
 
                 networkOutput.println(message);
-                response = networkInput.nextLine();
+                //response = networkInput.nextLine();
 
-                System.out.println("\nSERVER> " + response);
+                //System.out.println("\nSERVER> " + response);
             } while (!message.equals("QUIT"));
         }
         catch(IOException ioEx) {
