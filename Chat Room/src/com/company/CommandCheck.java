@@ -10,10 +10,10 @@ public class CommandCheck {
 
             String[] sArray = s.split(" ");
 
-            switch (sArray[0]){
+            switch (sArray[0].toUpperCase()){
 
                 // ChangeName
-                case "/ChangeName": if (sArray.length>1){
+                case "/CHANGENAME": if (sArray.length>1){
 
                     changeName(sArray[1],client);
                     s = "Name set to: " + sArray[1];
@@ -23,12 +23,12 @@ public class CommandCheck {
                 //
 
                 // MyInfo
-                case "/MyInfo":
+                case "/MYINFO":
                     return client.getUsername() + "\n" +
                             client.getHandlerID();
 
                 // Help
-                case "/Help":
+                case "/HELP":
                     s = "List of commands:\n" +
                             "/Help\n" +
                             "/ChangeName\n" +
