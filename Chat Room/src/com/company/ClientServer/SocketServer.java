@@ -56,7 +56,7 @@ public class SocketServer {
         for (ClientHandler handler:clientHandlerList) {
 
             if (handler.getHandlerID() != ID) {
-                handler.sendMessage(CommandCheck.message(message,handler));
+                handler.sendMessage(message);
             }
         }
 

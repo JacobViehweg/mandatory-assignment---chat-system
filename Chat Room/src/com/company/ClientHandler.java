@@ -38,7 +38,10 @@ public class ClientHandler extends Thread  {
             received = input.nextLine();
 
             //SocketServer.writeToClients(received);
-            SocketServer.writeToClientsNoEcho(received,getHandlerID());
+            if (!CommandCheck.slashCheck(received)){
+                SocketServer.writeToClientsNoEcho(received,getHandlerID());
+            } else { SocketServer.writeToSelf(CommandCheck.message(received,this),this.handlerID);}
+
 
             System.out.println("Recieved: " + received);
 

@@ -32,7 +32,7 @@ public class SocketClient {
         Socket socket = null;
 
         try {
-            socket = new Socket(host,PORT);
+            socket = new Socket("172.16.22.201",PORT);
 
             Scanner networkInput = new Scanner(socket.getInputStream());
 

@@ -6,7 +6,7 @@ public class CommandCheck {
 
     public static String message (String s,ClientHandler client){
 
-        if(s.charAt(0)=='/'){
+        if(slashCheck(s)){
 
             String[] sArray = s.split(" ");
 
@@ -53,5 +53,8 @@ public class CommandCheck {
 
     }
 
+    public static boolean slashCheck (String s){
+        return (s.charAt(0)=='/');
+    }
 
 }
