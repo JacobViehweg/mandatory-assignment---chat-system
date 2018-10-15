@@ -13,26 +13,33 @@ public class CommandCheck {
             switch (sArray[0]){
 
                 // ChangeName
-                case "/ChangeName": if (sArray.length>2){
+                case "/ChangeName": if (sArray.length>1){
+
                     changeName(sArray[1],client);
-                    System.out.println("Name set to: " + sArray[1]);
-                } else { System.out.println("No proper name given.");}
-                return "";
+                    s = "Name set to: " + sArray[1];
+                    System.out.println();
+                } else { s = "No proper name given.";}
+                return s;
                 //
+
+                // MyInfo
+                case "/MyInfo":
+                    return client.getUsername() + "\n" +
+                            client.getHandlerID();
 
                 // Help
                 case "/Help":
-                    System.out.println("List of commands:" +
-                            "/Help" +
-                            "/ChangeName" +
-                            "/Quit");
-                    return "";
+                    s = "List of commands:\n" +
+                            "/Help\n" +
+                            "/ChangeName\n" +
+                            "/MyInfo\n" +
+                            "/Quit\n";
+                    return s;
                 //
 
                 // Default
                 default:
-                    System.out.println("Invalid command type /Help for commands");
-                    return "";
+                    return "Invalid command type /Help for commands";
                 //
 
             }
@@ -42,7 +49,7 @@ public class CommandCheck {
 
     public static void changeName(String s, ClientHandler client){
 
-        client.setName(s);
+        client.setUsername(s);
 
     }
 

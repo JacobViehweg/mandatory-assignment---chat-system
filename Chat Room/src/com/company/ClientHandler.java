@@ -75,4 +75,12 @@ public class ClientHandler extends Thread  {
     public void setHandlerID(long handlerID) {
         this.handlerID = handlerID;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 }
