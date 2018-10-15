@@ -1,61 +1,81 @@
 package com.company.ClientServer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.*;
+import java.net.*;
 import java.util.Scanner;
 
 public class SocketServer {
 
-    private Scanner scanner = new Scanner(System.in);
-    private String userName = "";
-    private int serverPort = 6000;
-    private String serverIP = "127.0.0.1";
-    private String name = "Supermand";
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
-    private Date date = new Date();
+    private static ServerSocket serverSocket;
+    private static final int PORT = 1234;
 
-    private ServerSocket serverSocket;
-    private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
+    public static void main(String[] args) throws IOException {
 
-    public void start() throws IOException {
-        serverSocket = new ServerSocket(this.serverPort);
-        clientSocket = serverSocket.accept();
+        System.out.println("Starting server...");
 
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
-        run();
-
-    }
-
-    public void run() throws IOException {
-
-        while (true){
-
-            if (scanner.hasNextLine()){
-            out.println(scanner.nextLine());}
-
-
-
-            String msg = in.readLine() + "\n" + in.readLine();
-            System.out.println(msg);
+        try
+        {
+            serverSocket = new ServerSocket(PORT);
+        }
+        catch (IOException ioEx)
+        {
+            System.out.println("\nUnable to set up port!");
+            System.exit(1);
         }
 
+        do {
+
+            Socket client = serverSocket.accept();
+
+            System.out.println("\nNew client accepted.\n");
+
+            ClientHandler handler = new ClientHandler(client);
+            handler.start();
+        } while (true);
+
+
+    }
+}
+
+class ClientHandler extends Thread  {
+
+    private Socket client;
+    private Scanner input;
+    private PrintWriter output;
+
+    public ClientHandler(Socket socket) {
+
+        client = socket;
+
+        try {
+            input = new Scanner(client.getInputStream());
+            output = new PrintWriter(client.getOutputStream(),true);
+        }
+        catch (IOException ioEx) {
+            ioEx.printStackTrace();
+        }
     }
 
-    public void stop() throws IOException {
-        in.close();
-        out.close();
-        clientSocket.close();
-        serverSocket.close();
-    }
+    public void run() {
 
+        String received;
+
+        do {
+            received = input.nextLine();
+
+            output.println("ECHO: " + received);
+            System.out.println("Recieved: " + received);
+
+        } while (!received.equals("QUIT"));
+
+        try {
+            if (client!=null) {
+                System.out.println("Closing down connection...");
+                client.close();
+            }
+        }
+        catch (IOException ioEx) {
+            System.out.println("Unable to disconnect!");
+        }
+    }
 }

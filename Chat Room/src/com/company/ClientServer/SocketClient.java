@@ -1,56 +1,62 @@
 package com.company.ClientServer;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+import java.io.*;
+import java.net.*;
+import java.util.*;
 
 public class SocketClient {
 
-    private Scanner scanner = new Scanner(System.in);
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
-    private Date date = new Date();
-    private Socket clientSocket;
-    private PrintWriter out;
-    private BufferedReader in;
+    private static InetAddress host;
+    private static final int PORT = 1234;
 
-    public void startConnection(String ip, int port) throws IOException {
-        clientSocket = new Socket(ip, port);
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
-        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-    }
+    public static void main(String[] args) {
 
-    public String sendMessage(String msg) throws IOException {
-        out.println(msg);
-        String resp = in.readLine();
-        return resp;
-    }
-
-    public void chat () throws IOException {
-
-        while (true){
-
-            String dateString = simpleDateFormat.format(date.getTime()).toString();
-
-            if(scanner.hasNextLine()){
-            out.println(dateString + "\n" + scanner.nextLine());}
-
-
-            String msg = in.readLine();
-            System.out.println(dateString);
-            System.out.println(msg);
+        try {
+            host = InetAddress.getLocalHost();
         }
-
+        catch (UnknownHostException uhEx) {
+            System.out.println("\nHost ID not Found!\n");
+            System.exit(1);
+        }
+        sendMessages();
     }
 
-    public void stopConnection() throws IOException {
-        in.close();
-        out.close();
-        clientSocket.close();
-    }
+    private static void sendMessages() {
 
+        Socket socket = null;
+
+        try {
+            socket = new Socket(host,PORT);
+
+            Scanner networkInput = new Scanner(socket.getInputStream());
+
+            PrintWriter networkOutput = new PrintWriter(socket.getOutputStream(),true);
+
+            Scanner userEntry = new Scanner(System.in);
+            String message, response;
+
+            do {
+                System.out.print("Enter message ('QUIT' to exit): ");
+                message = userEntry.nextLine();
+
+                networkOutput.println(message);
+                response = networkInput.nextLine();
+
+                System.out.println("\nSERVER> " + response);
+            } while (!message.equals("QUIT"));
+        }
+        catch(IOException ioEx) {
+            ioEx.printStackTrace();
+        }
+        finally {
+            try {
+                System.out.println("\nClosing connection...");
+                socket.close();
+            }
+            catch (IOException ioEx) {
+                System.out.println("Unable to disconnect!");
+                System.exit(1);
+            }
+        }
+    }
 }
