@@ -13,7 +13,7 @@ public class SocketServer {
 
     private static ServerSocket serverSocket;
     private static final int PORT = 1234;
-    private static List<ClientHandler> clientHandlerList = new ArrayList<>();
+    public static List<ClientHandler> clientHandlerList = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
 
@@ -37,10 +37,7 @@ public class SocketServer {
 
             ClientHandler handler = new ClientHandler(client);
             handler.start();
-
             clientHandlerList.add(handler);
-            System.out.println(handler + " " + clientHandlerList.size() );
-
         } while (true);
 
 
@@ -51,12 +48,20 @@ public class SocketServer {
         for (ClientHandler handler:clientHandlerList) {
 
             handler.sendMessage(CommandCheck.message(message,handler));
+        }
+    }
 
+    public static void writeToClientsNoEcho (String message, long ID) {
+
+        for (ClientHandler handler:clientHandlerList) {
+
+            if (handler.getHandlerID() != ID) {
+                handler.sendMessage(CommandCheck.message(message,handler));
+            }
         }
 
-
-
     }
+
 
 
 

@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.ClientServer.SocketClient;
 import com.company.ClientServer.SocketServer;
 
 import java.io.IOException;
@@ -13,10 +14,12 @@ public class ClientHandler extends Thread  {
     private Scanner input;
     private PrintWriter output;
     private String username;
+    private long handlerID;
 
     public ClientHandler(Socket socket) {
 
         client = socket;
+        generateID();
 
         try {
             input = new Scanner(client.getInputStream());
@@ -34,8 +37,8 @@ public class ClientHandler extends Thread  {
         do {
             received = input.nextLine();
 
-            //output.println("ECHO: " + received);
-            SocketServer.writeToClients(received);
+            //SocketServer.writeToClients(received);
+            SocketServer.writeToClientsNoEcho(received,getHandlerID());
 
             System.out.println("Recieved: " + received);
 
@@ -56,4 +59,20 @@ public class ClientHandler extends Thread  {
         output.println(message);
     }
 
+    public void generateID() {
+        long newID = 1;
+
+        if (SocketServer.clientHandlerList.size() != 0) {
+            newID = SocketServer.clientHandlerList.get(SocketServer.clientHandlerList.size()-1).getHandlerID()+1;
+        }
+        setHandlerID(newID);
+    }
+
+    public long getHandlerID() {
+        return handlerID;
+    }
+
+    public void setHandlerID(long handlerID) {
+        this.handlerID = handlerID;
+    }
 }

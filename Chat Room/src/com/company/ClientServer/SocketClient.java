@@ -44,15 +44,17 @@ public class SocketClient {
             SocketClientThread socketClientThread = new SocketClientThread(socket);
             socketClientThread.start();
 
+            System.out.print("Enter message ('/Quit' to exit): ");
+
             do {
-                System.out.print("Enter message ('QUIT' to exit): ");
+
                 message = userEntry.nextLine();
 
                 networkOutput.println(message);
                 //response = networkInput.nextLine();
 
                 //System.out.println("\nSERVER> " + response);
-            } while (!message.equals("QUIT"));
+            } while (!message.equalsIgnoreCase("/quit"));
         }
         catch(IOException ioEx) {
             ioEx.printStackTrace();
