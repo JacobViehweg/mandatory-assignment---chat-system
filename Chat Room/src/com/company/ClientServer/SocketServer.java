@@ -1,6 +1,7 @@
 package com.company.ClientServer;
 
 import com.company.ClientHandler;
+import com.company.CommandCheck;
 
 import java.io.*;
 import java.net.*;
@@ -49,7 +50,7 @@ public class SocketServer {
 
         for (ClientHandler handler:clientHandlerList) {
 
-            handler.sendMessage(message);
+            handler.sendMessage(CommandCheck.message(message,handler));
 
         }
 
