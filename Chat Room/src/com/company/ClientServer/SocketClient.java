@@ -32,7 +32,7 @@ public class SocketClient {
         Socket socket = null;
 
         try {
-            socket = new Socket("172.16.22.201",PORT);
+            socket = new Socket(host,PORT);
 
             Scanner networkInput = new Scanner(socket.getInputStream());
 
@@ -51,6 +51,7 @@ public class SocketClient {
                 message = userEntry.nextLine();
 
                 networkOutput.println(message);
+                System.out.println(" ");
                 //response = networkInput.nextLine();
 
                 //System.out.println("\nSERVER> " + response);
