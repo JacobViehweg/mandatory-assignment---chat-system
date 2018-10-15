@@ -33,7 +33,7 @@ public class CommandCheck {
                             "/Help\n" +
                             "/ChangeName\n" +
                             "/MyInfo\n" +
-                            "/Quit\n";
+                            "/Quit";
                     return s;
                 //
 
