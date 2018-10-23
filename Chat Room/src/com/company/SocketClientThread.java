@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.Window.Window;
+
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
@@ -45,6 +47,7 @@ public class SocketClientThread extends Thread {
         while(true) {
             received = input.nextLine();
             System.out.println(received);
+            Window.message=Window.message + "<br>" +received;
         }
 
 

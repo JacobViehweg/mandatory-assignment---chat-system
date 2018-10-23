@@ -14,7 +14,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Window window = new Window();
-        window.run();
+        window.start();
+
+        SocketClient socketClient = new SocketClient();
+        socketClient.main(args);
 
     }
 
