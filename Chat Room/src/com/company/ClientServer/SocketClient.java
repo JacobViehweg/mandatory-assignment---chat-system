@@ -58,6 +58,10 @@ public class SocketClient {
                         socketClientThread.validation=0;
                         canSend=false;
                     }
+                    if (socketClientThread.validation==1) {
+                        accepted = 1;
+                        break;
+                    }
                 }
 
             }

@@ -42,12 +42,12 @@ public class CommandCheck {
                 // Validate username
                 case "/USERNAME": if (sArray.length>1) {
                     s = "true";
-                    String username = sArray[1];
+                    /*String username = sArray[1];
                     for (ClientHandler clientHandler : SocketServer.clientHandlerList) {
                         if (clientHandler.getUsername().equalsIgnoreCase(username)) {
                             s = "false";
                         }
-                    }
+                    }*/
                 }
                     return s;
                 //

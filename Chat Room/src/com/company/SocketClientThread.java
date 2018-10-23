@@ -29,19 +29,16 @@ public class SocketClientThread extends Thread {
 
         String received;
 
-        if (validation == 0) {
-            while(true) {
-                received = input.nextLine();
-                if (received.equalsIgnoreCase("true")) {
-                    validation = 1;
-                    break;
-                }
-                if (received.equalsIgnoreCase("false")) {
-                    validation = 2;
-                }
-
+        while(true) {
+            received = input.nextLine();
+            if (received.equalsIgnoreCase("true")) {
+                validation = 1;
+                break;
             }
-        }
+            if (received.equalsIgnoreCase("false")) {
+                validation = 2;
+                }
+            }
 
 
         while(true) {
