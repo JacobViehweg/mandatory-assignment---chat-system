@@ -10,6 +10,7 @@ public class SocketClient {
 
     private static InetAddress host;
     private static final int PORT = 1234;
+    public static boolean canSend = false;
 
     public static void main(String[] args) {
 
@@ -27,14 +28,15 @@ public class SocketClient {
         sendMessages();
     }
 
+
     private static void sendMessages() {
 
         Socket socket = null;
+        Scanner scanner = new Scanner(System.in);
+        int accepted = 0; //0 = no answer, 1 = accepted, 2 = denied
 
         try {
             socket = new Socket(host,PORT);
-
-            Scanner networkInput = new Scanner(socket.getInputStream());
 
             PrintWriter networkOutput = new PrintWriter(socket.getOutputStream(),true);
 
@@ -43,6 +45,26 @@ public class SocketClient {
 
             SocketClientThread socketClientThread = new SocketClientThread(socket);
             socketClientThread.start();
+
+            String username;
+            while (accepted != 1) {
+                System.out.print("Please enter your desired username: ");
+                username = scanner.nextLine();
+                canSend = true;
+                networkOutput.println("/USERNAME " + username);
+
+                while (canSend) {
+                    if (socketClientThread.validation==2) {
+                        socketClientThread.validation=0;
+                        canSend=false;
+                    }
+                }
+
+            }
+
+
+
+
 
             System.out.print("Enter message ('/Quit' to exit): ");
 

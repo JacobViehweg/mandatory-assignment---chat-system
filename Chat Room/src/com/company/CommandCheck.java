@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.ClientServer.SocketServer;
+
 import java.sql.SQLOutput;
 
 public class CommandCheck {
@@ -34,6 +36,19 @@ public class CommandCheck {
                             "/ChangeName\n" +
                             "/MyInfo\n" +
                             "/Quit";
+                    return s;
+                //
+
+                // Validate username
+                case "/USERNAME": if (sArray.length>1) {
+                    s = "true";
+                    String username = sArray[1];
+                    for (ClientHandler clientHandler : SocketServer.clientHandlerList) {
+                        if (clientHandler.getUsername().equalsIgnoreCase(username)) {
+                            s = "false";
+                        }
+                    }
+                }
                     return s;
                 //
 

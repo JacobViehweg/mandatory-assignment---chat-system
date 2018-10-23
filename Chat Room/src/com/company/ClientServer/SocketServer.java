@@ -33,11 +33,12 @@ public class SocketServer {
 
             Socket client = serverSocket.accept();
 
-            System.out.println("\nNew client accepted.\n");
-
             ClientHandler handler = new ClientHandler(client);
             handler.start();
             clientHandlerList.add(handler);
+
+            System.out.println("\nNew client accepted.\n");
+
         } while (true);
 
 

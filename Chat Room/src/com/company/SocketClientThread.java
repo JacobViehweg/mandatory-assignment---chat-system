@@ -8,6 +8,7 @@ public class SocketClientThread extends Thread {
 
     private Socket socketClient;
     private Scanner input;
+    public int validation = 0; //0 = no answer from server, 1 = accepted, 2 = rejected
 
     public SocketClientThread (Socket socket) throws IOException {
 
@@ -25,6 +26,21 @@ public class SocketClientThread extends Thread {
         System.out.println("Starting thread");
 
         String received;
+
+        if (validation == 0) {
+            while(true) {
+                received = input.nextLine();
+                if (received.equalsIgnoreCase("true")) {
+                    validation = 1;
+                    break;
+                }
+                if (received.equalsIgnoreCase("false")) {
+                    validation = 2;
+                }
+
+            }
+        }
+
 
         while(true) {
             received = input.nextLine();
