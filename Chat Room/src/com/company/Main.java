@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.ClientServer.SocketClient;
 import com.company.ClientServer.SocketServer;
+import com.company.Window.Window;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,11 +13,8 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        Socket socket = new Socket();
-        ClientHandler clientHandler = new ClientHandler(socket);
-        CommandCheck commandCheck = new CommandCheck();
-
-        System.out.println(commandCheck.message("/ChangeName",clientHandler));
+        Window window = new Window();
+        window.run();
 
     }
 
