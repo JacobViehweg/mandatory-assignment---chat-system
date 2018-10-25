@@ -10,7 +10,6 @@ public class SocketClient {
 
     private static InetAddress host;
     private static final int PORT = 1234;
-    public static boolean canSend = false;
 
     public static void main(String[] args) {
 
@@ -51,13 +50,13 @@ public class SocketClient {
             System.out.print("Please enter your desired username: ");
             while (accepted != 1) {
                 username = scanner.nextLine();
-                canSend = true;
+                boolean canSend = true;
                 networkOutput.println("/USERNAME " + username);
 
                 while (canSend) {
                     if (socketClientThread.validation==2) {
                         socketClientThread.validation=0;
-                        canSend=false;
+                        canSend =false;
                         System.out.print("Username already taken. Please enter another username: ");
                     }
                     if (socketClientThread.validation==1) {

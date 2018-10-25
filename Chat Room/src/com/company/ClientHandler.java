@@ -36,6 +36,7 @@ public class ClientHandler extends Thread  {
     public void run() {
 
         String received;
+        output.println("" + CommandCheck.countUsers());
 
         do {
             //tries to recieve a new string (maybe make the catch funktion not break the entire loop (to allow reconnection) )

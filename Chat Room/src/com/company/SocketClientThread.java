@@ -4,6 +4,7 @@ import com.company.Window.Window;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class SocketClientThread extends Thread {
@@ -29,8 +30,17 @@ public class SocketClientThread extends Thread {
 
         String received;
 
+        received = input.nextLine();
+        System.out.println("Current users online: " + received);
+
         while(true) {
-            received = input.nextLine();
+
+            try {
+                received = input.nextLine();
+            } catch (NoSuchElementException ioEx) {
+                break;
+            }
+
             if (received.equalsIgnoreCase("true")) {
                 validation = 1;
                 break;
@@ -42,7 +52,13 @@ public class SocketClientThread extends Thread {
 
 
         while(true) {
-            received = input.nextLine();
+
+            try {
+                received = input.nextLine();
+            } catch (NoSuchElementException ioEx) {
+                break;
+            }
+
             System.out.println(received);
             Window.message=Window.message + "<br>" +received;
         }

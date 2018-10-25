@@ -76,4 +76,18 @@ public class CommandCheck {
         return (s.charAt(0)=='/');
     }
 
+    public static int countUsers () {
+
+        int userCount = 0;
+
+        for (ClientHandler clientHandler:SocketServer.clientHandlerList) {
+
+            if (!clientHandler.getUsername().equalsIgnoreCase("")) {
+                userCount++;
+            }
+        }
+
+        return userCount;
+    }
+
 }
