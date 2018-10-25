@@ -25,7 +25,7 @@ public class SocketClientThread extends Thread {
 
     public void run() {
 
-        System.out.println("Starting thread");
+        //System.out.println("Starting thread");
 
         String received;
 

@@ -14,7 +14,7 @@ public class ClientHandler extends Thread  {
     private Socket client;
     private Scanner input;
     private PrintWriter output;
-    private String username;
+    private String username = "";
     private long handlerID;
 
     public ClientHandler(Socket socket) {
