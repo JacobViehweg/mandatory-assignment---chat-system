@@ -56,11 +56,6 @@ public class CommandCheck {
                     return s;
                 //
 
-                // close the client
-                case "/QUIT":
-                    return "";
-                //
-
                 // Default
                 default:
                     return "Invalid command, type /Help for commands";
