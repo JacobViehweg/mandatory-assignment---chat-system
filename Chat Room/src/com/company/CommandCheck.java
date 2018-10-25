@@ -50,6 +50,7 @@ public class CommandCheck {
                     }
                     if (s.equalsIgnoreCase("true")) {
                         changeName(username, client);
+                        SocketServer.writeToClientsNoEcho(username + " has joined the room", client.getHandlerID());
                     }
                 }
                     return s;

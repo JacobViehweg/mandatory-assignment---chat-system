@@ -7,11 +7,13 @@ import com.company.Window.Window;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ClientHandler extends Thread  {
 
-    private Socket client;
+    public Socket client;
     private Scanner input;
     private PrintWriter output;
     private String username = "";
@@ -36,27 +38,39 @@ public class ClientHandler extends Thread  {
         String received;
 
         do {
-            received = input.nextLine();
+            //tries to recieve a new string (maybe make the catch funktion not break the entire loop (to allow reconnection) )
+            try {
+                received = input.nextLine();
+            } catch (NoSuchElementException ioEx) {
+                System.out.println("Connection to [" + getUsername() + "] ended abrubtly");
+                break;
+            }
 
-            //SocketServer.writeToClients(received);
+            //checks the recieved messages
             if (!CommandCheck.slashCheck(received)){
-                SocketServer.writeToClientsNoEcho(received,getHandlerID());
+                Date date = new Date();
+                String time = date.getHours() + ":" + date.getMinutes();
+
+                SocketServer.writeToClientsNoEcho("[" + time + " | " + getUsername() + "] " + received,getHandlerID());
             } else { SocketServer.writeToSelf(CommandCheck.message(received,this),this.handlerID); }
 
+            //System.out.println("Recieved: " + received);
 
-            System.out.println("Recieved: " + received);
-
-        } while (!received.equals("QUIT"));
+        } while (!received.equalsIgnoreCase("/QUIT"));
 
         try {
             if (client!=null) {
                 System.out.println("Closing down connection...");
+                SocketServer.writeToClients(getUsername() + " has left the room");
                 client.close();
             }
         }
         catch (IOException ioEx) {
             System.out.println("Unable to disconnect!");
         }
+
+        SocketServer.removeClientHandler(getHandlerID());
+
     }
 
     public void sendMessage (String message) {

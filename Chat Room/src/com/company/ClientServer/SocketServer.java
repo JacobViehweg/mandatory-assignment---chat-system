@@ -48,7 +48,7 @@ public class SocketServer {
 
         for (ClientHandler handler:clientHandlerList) {
 
-            handler.sendMessage(CommandCheck.message(message,handler));
+            handler.sendMessage(message);
         }
     }
 
@@ -71,6 +71,19 @@ public class SocketServer {
                 handler.sendMessage(CommandCheck.message(message,handler));
             }
         }
+
+    }
+
+    public static void removeClientHandler (long ID) {
+
+        for (ClientHandler clientHandler:clientHandlerList) {
+            if (clientHandler.getHandlerID() == ID) {
+                clientHandlerList.remove(clientHandler);
+                break;
+            }
+
+        }
+
 
     }
 
