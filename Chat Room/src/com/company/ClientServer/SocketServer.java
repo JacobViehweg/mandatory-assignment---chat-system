@@ -87,6 +87,35 @@ public class SocketServer {
 
     }
 
+    public static String printOnlineUsers () {
+
+        int userCount = 0;
+        String users = "";
+        int newLine = 5;
+
+        for (ClientHandler handler:clientHandlerList) {
+
+            if (!handler.getUsername().equals("")) {
+                userCount++;
+
+                if (newLine == 0) {
+                    newLine = 8;
+                    users = users + ",\n" + handler.getUsername();
+                } else if (users.equals("")) {
+                    users = users + handler.getUsername();
+                }  else {
+                    users = users + ", " + handler.getUsername();
+                }
+                newLine = newLine-1;
+            }
+        }
+
+        String userList = "Users currently online (" + userCount + "): " + users;
+
+        return userList;
+
+    }
+
 
 
 

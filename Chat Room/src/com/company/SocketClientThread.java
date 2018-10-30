@@ -30,6 +30,7 @@ public class SocketClientThread extends Thread {
 
         received = input.nextLine();
         System.out.println("Current users online: " + received);
+        System.out.print("Please enter your desired username: ");
 
         while(true) {
 

@@ -16,7 +16,12 @@ public class CommandCheck {
 
                 // ChangeName
                 case "/CHANGENAME": if (sArray.length>1){
-
+                    for (ClientHandler handler:SocketServer.clientHandlerList) {
+                        if (handler.getUsername().equalsIgnoreCase(sArray[1])) {
+                            return "Username already taken";
+                        }
+                    }
+                    SocketServer.writeToClientsNoEcho(client.getUsername() + " changed their name to " + sArray[1], client.getHandlerID());
                     changeName(sArray[1],client);
                     s = "Name set to: " + sArray[1];
                     System.out.println();
@@ -56,9 +61,16 @@ public class CommandCheck {
                     return s;
                 //
 
+                // Return user list
+                case "/USERS":
+
+                    return SocketServer.printOnlineUsers();
+
+                //
+
                 // close the client
                 case "/QUIT":
-                    return "";
+                    return "/QUIT";
                 //
 
                 // Default

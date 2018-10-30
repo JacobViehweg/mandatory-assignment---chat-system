@@ -40,14 +40,13 @@ public class SocketClient {
             PrintWriter networkOutput = new PrintWriter(socket.getOutputStream(),true);
 
             Scanner userEntry = new Scanner(System.in);
-            String message, response;
+            String message;
 
             SocketClientThread socketClientThread = new SocketClientThread(socket);
             socketClientThread.start();
 
             //lock the client into a while loop until their username has been entered and validated from the server
             String username;
-            System.out.print("Please enter your desired username: ");
             while (accepted != 1) {
                 username = scanner.nextLine();
                 boolean canSend = true;

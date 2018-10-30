@@ -39,7 +39,7 @@ public class ClientHandler extends Thread  {
         output.println("" + CommandCheck.countUsers());
 
         do {
-            //tries to recieve a new string (maybe make the catch funktion not break the entire loop (to allow reconnection) )
+            //tries to recieve a new string (maybe make the catch function not break the entire loop (to allow reconnection) )
             try {
                 received = input.nextLine();
             } catch (NoSuchElementException ioEx) {
