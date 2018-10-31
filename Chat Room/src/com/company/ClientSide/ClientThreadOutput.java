@@ -49,6 +49,9 @@ public class ClientThreadOutput extends Thread {
             }
 
         } while (!message.equalsIgnoreCase("/quit"));
+        if (message.equalsIgnoreCase("/quit")) {
+            output.println("/quit");
+        }
 
     }
 

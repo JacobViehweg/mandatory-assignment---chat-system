@@ -6,37 +6,19 @@ import java.util.*;
 
 public class SocketClient {
 
-    private static InetAddress host;
-    private static final int PORT = 1234;
-
     public static void main(String[] args) {
-
-        try {
-            host = InetAddress.getLocalHost();
-
-        }
-        catch (UnknownHostException uhEx) {
-            System.out.println("\nHost ID not Found!\n");
-            System.exit(1);
-        }
-
-
-
         sendMessages();
     }
 
-
     private static void sendMessages() {
 
-        Socket socket = null;
+        Socket socket;
         Scanner scanner = new Scanner(System.in);
         int accepted = 0; //0 = no answer, 1 = accepted, 2 = denied
 
+        socket = newConnection();
+
         try {
-            socket = new Socket(host,PORT);
-
-            PrintWriter networkOutput = new PrintWriter(socket.getOutputStream(),true);
-
             Scanner userEntry = new Scanner(System.in);
             String message;
 
@@ -49,7 +31,15 @@ public class SocketClient {
             //lock the client into a while loop until their username has been entered and validated from the server
             String username;
             while (accepted != 1) {
-                username = scanner.nextLine();
+
+                while (true) {
+                    username = scanner.nextLine();
+                    if (username.matches("[a-zA-Z0-9_-]*$")) {
+                        break;
+                        }
+                    System.out.println("Username must not contain other symbols than '-' or '_'");
+                    }
+
                 boolean canSend = true;
                 clientThreadOutput.message="/USERNAME " + username;
 
@@ -68,26 +58,26 @@ public class SocketClient {
             }
 
             //begin chatting
-
-
-
             System.out.print("Enter message ('/Quit' to exit): \n");
 
             do {
-
                 message = userEntry.nextLine();
-
-                //networkOutput.println(message);
                 clientThreadOutput.message = message;
-            } while (!message.equalsIgnoreCase("/quit"));
+                if (message.equalsIgnoreCase("/quit")) {
+                    Thread.sleep(1000);
+                    break;
+                }
+            } while (true);
         }
         catch(IOException ioEx) {
             ioEx.printStackTrace();
-        }
-        finally {
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
             try {
                 System.out.println("\nClosing connection...");
                 socket.close();
+                System.exit(1);
             }
             catch (IOException ioEx) {
                 System.out.println("Unable to disconnect!");
@@ -95,4 +85,60 @@ public class SocketClient {
             }
         }
     }
+
+    public static Socket newConnection() {
+
+        Scanner scanner = new Scanner(System.in);
+        Socket socket = new Socket();
+        String input;
+        String ip;
+        int port;
+        boolean success=false;
+
+        System.out.println("\nEnter ip address and port: ");
+
+        while (!success) {
+
+            input = scanner.next();
+            ip="";
+            port=0;
+
+            if (input.equalsIgnoreCase("/quit")) {
+                System.exit(1);
+            }
+
+            if (input.matches("[0-9-:.]+")) {
+
+                for (int i = 0; i < input.length(); i++) {
+
+                    try {
+                        if (input.substring(i, i + 1).matches("[:]")) {
+                            try {
+                                port = Integer.parseInt(input.substring(i + 1, input.length()));
+                                try {
+                                    socket = new Socket(ip, port);
+                                    success = true;
+                                    break;
+                                } catch (IOException ioEx) {
+                                    System.out.println("Couldn't connect to server");
+                                } catch (IllegalArgumentException ioEx) {
+                                }
+                            } catch (NumberFormatException ioEx) {
+                                break;
+                            }
+                        } else {
+                            ip = ip + input.substring(i, i + 1);
+                        }
+                    } catch (StringIndexOutOfBoundsException ioEx) {
+                        break;
+                    }
+                }
+            }
+            if (success) {break;}
+            System.out.println("Not a valid ip address, please try again: ");
+        }
+        return socket;
+    }
+
+
 }

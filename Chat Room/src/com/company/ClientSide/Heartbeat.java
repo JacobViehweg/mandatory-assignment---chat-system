@@ -33,8 +33,6 @@ public class Heartbeat implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-
         }
     }
 

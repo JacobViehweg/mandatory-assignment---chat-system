@@ -32,7 +32,7 @@ public class ClientHandler extends Thread  {
 
     public void run() {
 
-        String received;
+        String received = "";
         output.println("" + CommandCheck.countUsers());
         heartbeatRecieved = new Date();
 
@@ -42,7 +42,6 @@ public class ClientHandler extends Thread  {
                 received = input.nextLine();
             } catch (NoSuchElementException ioEx) {
                 System.out.println("Connection to [" + getUsername() + "] lost, trying to reconnect...");
-                received="/Connection restored";
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -62,7 +61,6 @@ public class ClientHandler extends Thread  {
                     SocketServer.writeToSelf(received, this.handlerID);
                 }
             }
-
         } while (!received.equalsIgnoreCase("/QUIT") && (new Date().getTime()-this.heartbeatRecieved.getTime()<10000));
 
         try {

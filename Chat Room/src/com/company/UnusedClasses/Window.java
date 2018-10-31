@@ -1,4 +1,4 @@
-package com.company.Window;
+package com.company.UnusedClasses;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Random;

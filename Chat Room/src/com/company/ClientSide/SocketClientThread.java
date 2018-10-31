@@ -1,7 +1,6 @@
 package com.company.ClientSide;
 
-import com.company.ClientSide.Heartbeat;
-import com.company.Window.Window;
+import com.company.UnusedClasses.Window;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -28,8 +27,6 @@ public class SocketClientThread extends Thread {
 
     public void run() {
 
-        //System.out.println("Starting thread");
-
         String received;
 
         received = input.nextLine();
@@ -53,8 +50,7 @@ public class SocketClientThread extends Thread {
                 }
             }
 
-
-        while(true) {
+        do {
 
             try {
                 received = input.nextLine();
@@ -64,11 +60,6 @@ public class SocketClientThread extends Thread {
 
             System.out.println(received);
             Window.message=Window.message + "<br>" +received;
-        }
-
-
+        } while (!received.equalsIgnoreCase("/quit"));
     }
-
-
-
 }

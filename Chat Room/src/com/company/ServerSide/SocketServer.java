@@ -1,5 +1,7 @@
 package com.company.ServerSide;
 
+import com.company.UnusedClasses.Alive;
+
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
@@ -13,9 +15,6 @@ public class SocketServer {
     public static List<Alive> living = new ArrayList<>();
 
     public static void main(String[] args) throws IOException {
-
-        //KillTheDead killTheDead = new KillTheDead();
-        //new Thread(killTheDead).start();
 
         System.out.println("Starting server...");
 

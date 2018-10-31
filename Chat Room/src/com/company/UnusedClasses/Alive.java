@@ -1,4 +1,4 @@
-package com.company.ServerSide;
+package com.company.UnusedClasses;
 
 import com.company.ServerSide.SocketServer;
 

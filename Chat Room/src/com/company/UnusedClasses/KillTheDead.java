@@ -1,6 +1,5 @@
-package com.company.ServerSide;
+package com.company.UnusedClasses;
 
-import com.company.ServerSide.Alive;
 import com.company.ServerSide.ClientHandler;
 import com.company.ServerSide.SocketServer;
 
