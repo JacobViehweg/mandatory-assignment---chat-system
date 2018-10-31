@@ -1,15 +1,9 @@
-package com.company.ClientServer;
-
-import com.company.Alive;
-import com.company.ClientHandler;
-import com.company.CommandCheck;
-import com.company.KillTheDead;
+package com.company.ServerSide;
 
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class SocketServer {
 

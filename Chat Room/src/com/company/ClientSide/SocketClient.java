@@ -1,6 +1,4 @@
-package com.company.ClientServer;
-
-import com.company.SocketClientThread;
+package com.company.ClientSide;
 
 import java.io.*;
 import java.net.*;
@@ -35,7 +33,7 @@ public class SocketClient {
         int accepted = 0; //0 = no answer, 1 = accepted, 2 = denied
 
         try {
-            socket = new Socket("192.168.43.252",PORT);
+            socket = new Socket(host,PORT);
 
             PrintWriter networkOutput = new PrintWriter(socket.getOutputStream(),true);
 

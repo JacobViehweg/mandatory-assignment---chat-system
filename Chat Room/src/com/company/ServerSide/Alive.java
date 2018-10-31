@@ -1,6 +1,6 @@
-package com.company;
+package com.company.ServerSide;
 
-import com.company.ClientServer.SocketServer;
+import com.company.ServerSide.SocketServer;
 
 public class Alive implements Runnable {
 

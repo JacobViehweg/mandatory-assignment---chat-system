@@ -1,8 +1,4 @@
-package com.company;
-
-import com.company.ClientServer.SocketClient;
-import com.company.ClientServer.SocketServer;
-import com.company.Window.Window;
+package com.company.ServerSide;
 
 import java.io.IOException;
 import java.io.PrintWriter;

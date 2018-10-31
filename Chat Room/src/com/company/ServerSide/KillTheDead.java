@@ -1,7 +1,8 @@
-package com.company;
+package com.company.ServerSide;
 
-import com.company.ClientServer.SocketServer;
-import com.sun.security.ntlm.Client;
+import com.company.ServerSide.Alive;
+import com.company.ServerSide.ClientHandler;
+import com.company.ServerSide.SocketServer;
 
 import java.util.Iterator;
 

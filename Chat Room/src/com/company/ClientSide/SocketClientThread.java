@@ -1,6 +1,6 @@
-package com.company;
+package com.company.ClientSide;
 
-import com.company.ClientServer.SocketServer;
+import com.company.ClientSide.Heartbeat;
 import com.company.Window.Window;
 
 import java.io.IOException;

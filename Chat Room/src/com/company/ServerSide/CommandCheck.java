@@ -1,8 +1,4 @@
-package com.company;
-
-import com.company.ClientServer.SocketServer;
-
-import java.sql.SQLOutput;
+package com.company.ServerSide;
 
 public class CommandCheck {
 
