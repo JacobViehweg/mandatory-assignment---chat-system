@@ -51,7 +51,7 @@ public class SocketClient {
             while (accepted != 1) {
                 username = scanner.nextLine();
                 boolean canSend = true;
-                networkOutput.println("/USERNAME " + username);
+                clientThreadOutput.message="/USERNAME " + username;
 
                 while (canSend) {
                     if (socketClientThread.validation==2) {

@@ -14,6 +14,7 @@ public class ClientHandler extends Thread  {
     private PrintWriter output;
     private String username = "";
     private long handlerID;
+    private Date heartbeatRecieved;
 
     public ClientHandler(Socket socket) {
 
@@ -33,6 +34,7 @@ public class ClientHandler extends Thread  {
 
         String received;
         output.println("" + CommandCheck.countUsers());
+        heartbeatRecieved = new Date();
 
         do {
             //tries to recieve a new string (maybe make the catch function not break the entire loop (to allow reconnection) )
@@ -61,9 +63,7 @@ public class ClientHandler extends Thread  {
                 }
             }
 
-            //System.out.println("Recieved: " + received);
-
-        } while (!received.equalsIgnoreCase("/QUIT"));
+        } while (!received.equalsIgnoreCase("/QUIT") && (new Date().getTime()-this.heartbeatRecieved.getTime()<10000));
 
         try {
             if (client!=null) {
@@ -108,4 +108,9 @@ public class ClientHandler extends Thread  {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public void setHeartbeatRecieved(Date heartbeatRecieved) {
+        this.heartbeatRecieved = heartbeatRecieved;
+    }
+
 }

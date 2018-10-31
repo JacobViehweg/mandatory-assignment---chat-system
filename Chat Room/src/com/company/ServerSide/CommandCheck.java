@@ -1,5 +1,7 @@
 package com.company.ServerSide;
 
+import java.util.Date;
+
 public class CommandCheck {
 
     public static String message (String s,ClientHandler client){
@@ -13,9 +15,7 @@ public class CommandCheck {
                 //Heartbeat
                 case "/HEARTBEATALIVE":
                     System.out.println("IMAW: " + client.getHandlerID());
-                    Alive alive = new Alive(client.getHandlerID());
-                    new Thread(alive).start();
-                    SocketServer.living.add(alive);
+                    client.setHeartbeatRecieved(new Date());
                     return "/HEARTBEAT";
 
                 // ChangeName
