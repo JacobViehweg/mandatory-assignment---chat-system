@@ -39,8 +39,8 @@ public class ClientHandler extends Thread  {
             try {
                 received = input.nextLine();
             } catch (NoSuchElementException ioEx) {
-                System.out.println("Connection to [" + getUsername() + "] trying to reconnect...");
-                received="null";
+                System.out.println("Connection to [" + getUsername() + "] lost, trying to reconnect...");
+                received="/Connection restored";
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
