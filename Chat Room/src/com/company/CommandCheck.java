@@ -14,6 +14,14 @@ public class CommandCheck {
 
             switch (sArray[0].toUpperCase()){
 
+                //Heartbeat
+                case "/HEARTBEATALIVE":
+                    System.out.println("IMAW: " + client.getHandlerID());
+                    Alive alive = new Alive(client.getHandlerID());
+                    new Thread(alive).start();
+                    SocketServer.living.add(alive);
+                    return "/HEARTBEAT";
+
                 // ChangeName
                 case "/CHANGENAME": if (sArray.length>1){
                     for (ClientHandler handler:SocketServer.clientHandlerList) {

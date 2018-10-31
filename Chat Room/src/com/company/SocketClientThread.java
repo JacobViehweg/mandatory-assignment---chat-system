@@ -16,6 +16,10 @@ public class SocketClientThread extends Thread {
     public SocketClientThread (Socket socket) throws IOException {
 
         socketClient = socket;
+
+        Heartbeat heartbeat = new Heartbeat(socket);
+        new Thread(heartbeat).start();
+
         try {
             input = new Scanner(socketClient.getInputStream());
         } catch (IOException ioEx) {

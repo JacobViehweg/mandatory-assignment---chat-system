@@ -53,7 +53,10 @@ public class ClientHandler extends Thread  {
                 String time = date.getHours() + ":" + date.getMinutes();
 
                 SocketServer.writeToClientsNoEcho("[" + time + " | " + getUsername() + "] " + received,getHandlerID());
-            } else { SocketServer.writeToSelf(CommandCheck.message(received,this),this.handlerID); }
+            } else {
+                received = CommandCheck.message(received,this);
+                if(received.equalsIgnoreCase("/HEARTBEAT")){
+                SocketServer.writeToSelf(received,this.handlerID); }}
 
             //System.out.println("Recieved: " + received);
 
