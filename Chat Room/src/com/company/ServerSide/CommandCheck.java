@@ -28,7 +28,6 @@ public class CommandCheck {
                     SocketServer.writeToClientsNoEcho(client.getUsername() + " changed their name to " + sArray[1], client.getHandlerID());
                     changeName(sArray[1],client);
                     s = "Name set to: " + sArray[1];
-                    System.out.println();
                 } else if (client.getUsername().length()>0) { s = "No valid name given or name is already in use.";
                 } else {s = "Username not valid or is already in use, try again: ";}
                 return s;

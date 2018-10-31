@@ -75,9 +75,7 @@ public class ClientHandler extends Thread  {
         catch (IOException ioEx) {
             System.out.println("Unable to disconnect!");
         }
-
         SocketServer.removeClientHandler(getHandlerID());
-
     }
 
     public void sendMessage (String message) {

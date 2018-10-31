@@ -57,6 +57,7 @@ public class SocketClient {
                     if (socketClientThread.validation==2) {
                         socketClientThread.validation=0;
                         canSend =false;
+                        System.out.print("Username not valid or is already in use, try again: ");
                     }
                     if (socketClientThread.validation==1) {
                         accepted = 1;
@@ -78,7 +79,6 @@ public class SocketClient {
 
                 //networkOutput.println(message);
                 clientThreadOutput.message = message;
-                System.out.println(" ");
             } while (!message.equalsIgnoreCase("/quit"));
         }
         catch(IOException ioEx) {
