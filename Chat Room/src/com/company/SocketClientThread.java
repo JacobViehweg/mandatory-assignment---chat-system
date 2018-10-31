@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.ClientServer.SocketServer;
 import com.company.Window.Window;
 
 import java.io.IOException;
@@ -17,7 +18,11 @@ public class SocketClientThread extends Thread {
 
         socketClient = socket;
 
-        Heartbeat heartbeat = new Heartbeat(socket);
+        Socket socket2;
+
+        socket2 = socket;
+
+        Heartbeat heartbeat = new Heartbeat(socket2);
         new Thread(heartbeat).start();
 
         try {

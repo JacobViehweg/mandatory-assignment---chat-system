@@ -13,7 +13,7 @@ public class Alive implements Runnable {
     @Override
     public void run() {
         try {
-            Thread.sleep(600000);
+            Thread.sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

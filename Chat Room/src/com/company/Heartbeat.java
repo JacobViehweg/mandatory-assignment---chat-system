@@ -29,7 +29,7 @@ public class Heartbeat implements Runnable {
 
         while (true){
             try {
-                Thread.sleep(60000);
+                Thread.sleep(600);
                 sendHeartbeat("/HeartbeatAlive");
             } catch (InterruptedException e) {
                 e.printStackTrace();
