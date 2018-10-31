@@ -6,36 +6,37 @@ import java.net.Socket;
 
 public class Heartbeat implements Runnable {
 
-    private Socket socket;
-    private PrintWriter output;
+    public boolean heartbeat;
 
-    public Heartbeat(Socket socket){
-        this.socket = socket;
+    public Heartbeat(){
+        heartbeat=true;
     }
 
     @Override
     public void run() {
 
-        try {
-            output = new PrintWriter(socket.getOutputStream(),true);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
         while (true){
+
+            if (!heartbeat) {
+
+                try {
+                    Thread.sleep(600);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                heartbeat = true;
+
+            }
+
             try {
-                Thread.sleep(600);
-                sendHeartbeat("/HeartbeatAlive");
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
 
-            //output.println("Test det!");
         }
     }
 
-    public void sendHeartbeat (String s) { output.println(s); }
 
 }

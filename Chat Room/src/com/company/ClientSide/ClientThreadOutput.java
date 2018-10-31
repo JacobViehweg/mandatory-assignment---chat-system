@@ -24,12 +24,22 @@ public class ClientThreadOutput extends Thread {
 
     public void run() {
 
+        Heartbeat heartbeat = new Heartbeat();
+        new Thread(heartbeat).start();
+
         do {
 
+            //send message to server
             if (!message.equals("")) {
                 output.println(message);
                 message = "";
                 System.out.println(" ");
+            }
+
+            //heartbeat message
+            if (heartbeat.heartbeat) {
+                output.println("/HEARTBEATALIVE");
+                heartbeat.heartbeat = false;
             }
 
             try {
