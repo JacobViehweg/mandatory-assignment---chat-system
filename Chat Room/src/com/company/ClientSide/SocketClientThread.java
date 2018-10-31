@@ -18,12 +18,12 @@ public class SocketClientThread extends Thread {
 
         socketClient = socket;
 
-        Socket socket2;
+        //Socket socket2;
 
-        socket2 = socket;
+        //socket2 = socket;
 
-        Heartbeat heartbeat = new Heartbeat(socket2);
-        new Thread(heartbeat).start();
+        //Heartbeat heartbeat = new Heartbeat(socket2);
+        //new Thread(heartbeat).start();
 
         try {
             input = new Scanner(socketClient.getInputStream());

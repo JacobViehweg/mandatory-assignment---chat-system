@@ -40,7 +40,7 @@ public class ClientHandler extends Thread  {
                 received = input.nextLine();
             } catch (NoSuchElementException ioEx) {
                 System.out.println("Connection to [" + getUsername() + "] trying to reconnect...");
-                received="";
+                received="null";
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -56,8 +56,10 @@ public class ClientHandler extends Thread  {
                 SocketServer.writeToClientsNoEcho("[" + time + " | " + getUsername() + "] " + received,getHandlerID());
             } else {
                 received = CommandCheck.message(received,this);
-                if(received.equalsIgnoreCase("/HEARTBEAT")){
-                SocketServer.writeToSelf(received,this.handlerID); }}
+                if (!received.equalsIgnoreCase("/HEARTBEAT")) {
+                    SocketServer.writeToSelf(received, this.handlerID);
+                }
+            }
 
             //System.out.println("Recieved: " + received);
 

@@ -63,14 +63,20 @@ public class SocketClient {
                 }
 
             }
+
             //begin chatting
+            ClientThreadOutput clientThreadOutput = new ClientThreadOutput(socket);
+            clientThreadOutput.start();
+
+
             System.out.print("Enter message ('/Quit' to exit): \n");
 
             do {
 
                 message = userEntry.nextLine();
 
-                networkOutput.println(message);
+                //networkOutput.println(message);
+                clientThreadOutput.message = message;
                 System.out.println(" ");
             } while (!message.equalsIgnoreCase("/quit"));
         }
