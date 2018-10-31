@@ -43,8 +43,13 @@ public class ClientHandler extends Thread  {
             try {
                 received = input.nextLine();
             } catch (NoSuchElementException ioEx) {
-                System.out.println("Connection to [" + getUsername() + "] ended abrubtly");
-                break;
+                System.out.println("Connection to [" + getUsername() + "] trying to reconnect...");
+                received="";
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
 
             //checks the recieved messages
