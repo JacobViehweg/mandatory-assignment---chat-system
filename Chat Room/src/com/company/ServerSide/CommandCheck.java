@@ -14,7 +14,7 @@ public class CommandCheck {
 
                 //Heartbeat
                 case "/HEARTBEATALIVE":
-                    System.out.println("IMAW: " + client.getHandlerID());
+                    System.out.println("IMAW: " + client.getHandlerID() + " [" + client.getUsername() + "]");
                     client.setHeartbeatRecieved(new Date());
                     return "/HEARTBEAT";
 

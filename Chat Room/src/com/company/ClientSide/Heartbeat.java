@@ -20,7 +20,7 @@ public class Heartbeat implements Runnable {
             if (!heartbeat) {
 
                 try {
-                    Thread.sleep(600);
+                    Thread.sleep(60000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

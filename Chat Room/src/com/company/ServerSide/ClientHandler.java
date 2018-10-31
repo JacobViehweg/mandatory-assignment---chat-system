@@ -43,7 +43,7 @@ public class ClientHandler extends Thread  {
             } catch (NoSuchElementException ioEx) {
                 System.out.println("Connection to [" + getUsername() + "] lost, trying to reconnect...");
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -61,11 +61,11 @@ public class ClientHandler extends Thread  {
                     SocketServer.writeToSelf(received, this.handlerID);
                 }
             }
-        } while (!received.equalsIgnoreCase("/QUIT") && (new Date().getTime()-this.heartbeatRecieved.getTime()<10000));
+        } while (!received.equalsIgnoreCase("/QUIT") && (new Date().getTime()-this.heartbeatRecieved.getTime()<300000));
 
         try {
             if (client!=null) {
-                System.out.println("Closing down connection...");
+                System.out.println("Closing down connection to [" + this.username + "]...");
                 SocketServer.writeToClients(getUsername() + " has left the room");
                 client.close();
             }
