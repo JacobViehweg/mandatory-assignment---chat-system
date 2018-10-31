@@ -14,8 +14,8 @@ public class SocketServer {
 
     public static void main(String[] args) throws IOException {
 
-        KillTheDead killTheDead = new KillTheDead();
-        new Thread(killTheDead).start();
+        //KillTheDead killTheDead = new KillTheDead();
+        //new Thread(killTheDead).start();
 
         System.out.println("Starting server...");
 
