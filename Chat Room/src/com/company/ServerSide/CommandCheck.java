@@ -19,7 +19,7 @@ public class CommandCheck {
                     return "/HEARTBEAT";
 
                 // ChangeName
-                case "/CHANGENAME": if (sArray.length>1){
+                case "/CHANGENAME": if (sArray.length>1 && sArray[1].matches("[a-zA-Z0-9_-]*$") && sArray[1].length()<13 && sArray[1].length()>0){
                     for (ClientHandler handler:SocketServer.clientHandlerList) {
                         if (handler.getUsername().equalsIgnoreCase(sArray[1])) {
                             return "Username already taken";
@@ -29,7 +29,8 @@ public class CommandCheck {
                     changeName(sArray[1],client);
                     s = "Name set to: " + sArray[1];
                     System.out.println();
-                } else { s = "No proper name given.";}
+                } else if (client.getUsername().length()>0) { s = "No valid name given or name is already in use.";
+                } else {s = "Username not valid or is already in use, try again: ";}
                 return s;
                 //
 

@@ -43,6 +43,9 @@ public class SocketClient {
             SocketClientThread socketClientThread = new SocketClientThread(socket);
             socketClientThread.start();
 
+            ClientThreadOutput clientThreadOutput = new ClientThreadOutput(socket);
+            clientThreadOutput.start();
+
             //lock the client into a while loop until their username has been entered and validated from the server
             String username;
             while (accepted != 1) {
@@ -54,7 +57,6 @@ public class SocketClient {
                     if (socketClientThread.validation==2) {
                         socketClientThread.validation=0;
                         canSend =false;
-                        System.out.print("Username already taken. Please enter another username: ");
                     }
                     if (socketClientThread.validation==1) {
                         accepted = 1;
@@ -65,8 +67,7 @@ public class SocketClient {
             }
 
             //begin chatting
-            ClientThreadOutput clientThreadOutput = new ClientThreadOutput(socket);
-            clientThreadOutput.start();
+
 
 
             System.out.print("Enter message ('/Quit' to exit): \n");
